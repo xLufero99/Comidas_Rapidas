@@ -15,12 +15,12 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<Producto> obtenerProductos() {
-        return productoRepository.findAll();
-    }
-
     public Producto crearProducto(Producto producto) {
         return productoRepository.save(producto);
+    }
+
+    public List<Producto> obtenerProductos() {
+        return productoRepository.findAll();
     }
 
     public Producto actualizarProducto(Long id, Producto datos) {

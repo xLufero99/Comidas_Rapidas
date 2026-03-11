@@ -15,17 +15,18 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public List<Cliente> obtenerClientes() {
-        return clienteRepository.findAll();
-    }
-
     public Cliente crearCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
+    public List<Cliente> obtenerClientes() {
+        return clienteRepository.findAll();
+    }
+
     public Cliente actualizarCliente(Long id, Cliente datos) {
 
-        Cliente cliente = clienteRepository.findById(id).orElseThrow();
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
         cliente.setNombre(datos.getNombre());
         cliente.setTelefono(datos.getTelefono());

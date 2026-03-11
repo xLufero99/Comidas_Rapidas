@@ -56,7 +56,8 @@ public class MenuConsola implements CommandLineRunner {
             System.out.println("\n--- CLIENTES ---");
             System.out.println("1. Crear cliente");
             System.out.println("2. Listar clientes");
-            System.out.println("3. Eliminar cliente");
+            System.out.println("3. Actualizar cliente");
+            System.out.println("4. Eliminar cliente");
             System.out.println("0. Volver");
 
             opcion = scanner.nextInt();
@@ -82,11 +83,35 @@ public class MenuConsola implements CommandLineRunner {
                 }
 
                 case 2 -> clienteService.obtenerClientes()
-                        .forEach(c -> System.out.println(c.getId() + " - " + c.getNombre()));
+                        .forEach(c ->
+                                System.out.println(c.getId() + " - " + c.getNombre())
+                        );
 
                 case 3 -> {
 
-                    System.out.print("ID cliente: ");
+                    System.out.print("ID cliente a actualizar: ");
+                    Long id = scanner.nextLong();
+                    scanner.nextLine();
+
+                    System.out.print("Nuevo nombre: ");
+                    String nombre = scanner.nextLine();
+
+                    System.out.print("Nuevo telefono: ");
+                    String telefono = scanner.nextLine();
+
+                    System.out.print("Nueva direccion: ");
+                    String direccion = scanner.nextLine();
+
+                    Cliente cliente = new Cliente(nombre, telefono, direccion);
+
+                    clienteService.actualizarCliente(id, cliente);
+
+                    System.out.println("Cliente actualizado.");
+                }
+
+                case 4 -> {
+
+                    System.out.print("ID cliente a eliminar: ");
                     Long id = scanner.nextLong();
 
                     clienteService.eliminarCliente(id);
@@ -108,7 +133,8 @@ public class MenuConsola implements CommandLineRunner {
             System.out.println("\n--- PRODUCTOS ---");
             System.out.println("1. Crear producto");
             System.out.println("2. Listar productos");
-            System.out.println("3. Eliminar producto");
+            System.out.println("3. Actualizar producto");
+            System.out.println("4. Eliminar producto");
             System.out.println("0. Volver");
 
             opcion = scanner.nextInt();
@@ -135,11 +161,36 @@ public class MenuConsola implements CommandLineRunner {
                 }
 
                 case 2 -> productoService.obtenerProductos()
-                        .forEach(p -> System.out.println(p.getId() + " - " + p.getNombre()));
+                        .forEach(p ->
+                                System.out.println(p.getId() + " - " + p.getNombre())
+                        );
 
                 case 3 -> {
 
-                    System.out.print("ID producto: ");
+                    System.out.print("ID producto a actualizar: ");
+                    Long id = scanner.nextLong();
+                    scanner.nextLine();
+
+                    System.out.print("Nuevo nombre: ");
+                    String nombre = scanner.nextLine();
+
+                    System.out.print("Nuevo precio: ");
+                    double precio = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    System.out.print("Nueva descripcion: ");
+                    String descripcion = scanner.nextLine();
+
+                    Producto producto = new Producto(nombre, precio, descripcion);
+
+                    productoService.actualizarProducto(id, producto);
+
+                    System.out.println("Producto actualizado.");
+                }
+
+                case 4 -> {
+
+                    System.out.print("ID producto a eliminar: ");
                     Long id = scanner.nextLong();
 
                     productoService.eliminarProducto(id);
